@@ -5,13 +5,17 @@ import java.time.LocalDateTime;
 import com.example.afpoo.model.Client;
 import com.example.afpoo.model.Vehicle;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 public class BookingDTO {
+    @NotBlank(message = "Cliente is required!");
     private Client client;
+    @NotBlank(message = "Vehicle is required!");
     private Vehicle vehicle;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy");
     private LocalDateTime startDate;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy");
     private LocalDateTime endDate;
 
     public Client getClient() {

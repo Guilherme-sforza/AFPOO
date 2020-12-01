@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/clients")
 public class ClientController {
@@ -49,8 +52,23 @@ public class ClientController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{code}")
+    public ResponseEntity<Client> att(@RequestBody ClientDTO clientDTO, @PathVariable int code){
+        Client client = clientService.fromDTO(clientDTO);
+        client.setCode(code);
+        client = clientService.update(client);
+        return ResponseEntity.ok(client);
+    } 
+
+    @GetMapping("/{codigo}")
+    public ResponseEntity<Client> getClientByCode(@PathVariable int code){
+        Client client = clientService.getClientByCode(code);
+        return ResponseEntity.ok(client);
+    }
+
+
     @PostMapping()
-    public ResponseEntity<Client> save(@RequestBody ClientDTO clientDTO, HttpServletRequest request,
+    public ResponseEntity<Client> save(@Valid @RequestBody ClientDTO clientDTO, HttpServletRequest request,
             UriComponentsBuilder builder
 
     ) {
