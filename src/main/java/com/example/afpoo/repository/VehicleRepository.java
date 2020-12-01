@@ -17,7 +17,7 @@ public class VehicleRepository {
 	private int nextCode;
 
     @PostConstruct
-	public void createClients(){
+	public void createVehicles(){
 		Vehicle v1 = new Vehicle();
 		Vehicle v2 = new Vehicle();
 		Vehicle v3 = new Vehicle();
@@ -77,5 +77,6 @@ public class VehicleRepository {
         }
         return aux;
 	}
-    
+	
+	
 }

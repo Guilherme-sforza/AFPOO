@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.example.afpoo.dto.ClientDTO;
+import com.example.afpoo.model.Booking;
 import com.example.afpoo.model.Client;
+import com.example.afpoo.service.BookingService;
 import com.example.afpoo.service.ClientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ClientController {
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private BookingService bookingService;
 
     @GetMapping()
     public List<Client> getClients() {
@@ -53,6 +58,17 @@ public class ClientController {
         Client client = clientService.fromDTO(clientDTO);
         Client newClient = clientService.save(client);
         UriComponents uriComponents = builder.path(request.getRequestURI() + "/" + newClient.getCode()).build();
+        return ResponseEntity.created(uriComponents.toUri()).build();
+    }
+
+    @PostMapping("/{idClient}/booking/{idVehicle}")
+    public ResponseEntity<Booking> save(@PathVariable int idClient, @PathVariable int idVehicle, @RequestBody Booking booking,
+            HttpServletRequest request, UriComponentsBuilder builder
+
+    ) {
+
+        booking = bookingService.save(booking, idClient, idVehicle);
+        UriComponents uriComponents = builder.path(request.getRequestURI() + "/" + booking.getCode()).build();
         return ResponseEntity.created(uriComponents.toUri()).build();
     }
 
