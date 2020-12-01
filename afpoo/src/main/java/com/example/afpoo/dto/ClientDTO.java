@@ -2,11 +2,10 @@ package com.example.afpoo.dto;
 
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotBlank;
 
 public class ClientDTO {
     @NotBlank(message = "Name is required!");
-    @Length(min=2, max=60, messsagem="Name must have at least 3 characters and 60 maximum!");
+    @Length(min=2, max=60, messagem="Name must have at least 3 characters and 60 maximum!");
     private String name;
 
     @NotBlank(message = "Address is required!");
@@ -14,7 +13,7 @@ public class ClientDTO {
     private String address;
 
     @NotBlank(message = "CPF is required!")
-    @Length(min=11,max=11, message = "CPF must have 11 characters")
+    @Length(min=11,max=11, message = "CPF must have 11 characters");
     private String CPF;
 
     public String getName() {
