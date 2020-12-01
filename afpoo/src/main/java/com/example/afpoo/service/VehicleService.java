@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class VehicleService {
 
 	@Autowired
-    VehicleRepository repository;
+    private VehicleRepository repository;
 	
 	public List<Vehicle> getAllVehicles() {
 		return repository.getAllClients();
@@ -50,5 +50,6 @@ public class VehicleService {
 		getVehicleByCode(vehicle.getCode());
         return repository.update(vehicle);
 	}
-    
+	
+	
 }

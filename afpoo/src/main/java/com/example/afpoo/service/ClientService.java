@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class ClientService {
 
     @Autowired
-    ClientRepository repository;
+    private ClientRepository repository;
 
 	public List<Client> getAllClients() {
 		return repository.getAllClients();
@@ -52,6 +52,7 @@ public class ClientService {
 		getClientByCode(client.getCode());
         return repository.update(client);
 	}
+
 
 
     

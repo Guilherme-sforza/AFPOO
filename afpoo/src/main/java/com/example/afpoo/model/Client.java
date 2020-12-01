@@ -1,10 +1,18 @@
 package com.example.afpoo.model;
 
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Client {
     private int code;
     private String name;
     private String address;
     private String cpf;
+
+    @JsonIgnore
+    private ArrayList<Booking> bookings = new ArrayList<Booking>();
+
 
     public int getCode() {
         return code;
@@ -38,5 +46,8 @@ public class Client {
         this.cpf = cpf;
     }
 
+    public boolean addBooking(Booking booking) {
+        return bookings.add(booking);
+    }
 
 }
