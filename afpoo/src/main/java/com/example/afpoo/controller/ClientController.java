@@ -1,7 +1,5 @@
 package com.example.afpoo.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.example.afpoo.dto.ClientDTO;
@@ -22,9 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/clients")
