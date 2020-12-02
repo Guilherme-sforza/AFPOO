@@ -26,14 +26,23 @@ public class ClientService {
         Optional<Client> op = repository.getClientByCode(code);
          return op.orElseThrow( () -> 
                    new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,"Cliente nao cadastrado"
+                        HttpStatus.NOT_FOUND,"Client not registered"
                    )
                 );
     }
     
     public void removeByCode(int code) {
-		repository.remove(getClientByCode(code));
-	}
+        Client aux = repository.getClientByCode(code).get();
+        if(aux.getBookings().isEmpty())
+        {
+            repository.remove(aux); 
+            return;
+        }
+        Optional.empty().orElseThrow( () ->
+            new ResponseStatusException( 
+                HttpStatus.METHOD_NOT_ALLOWED,"Client has bookings")
+        );
+    }
 
 
 	public Client save(Client client) {

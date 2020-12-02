@@ -3,8 +3,10 @@ package com.example.afpoo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import com.example.afpoo.dto.VehicleDTO;
+import com.example.afpoo.model.Booking;
 import com.example.afpoo.model.Vehicle;
 import com.example.afpoo.service.VehicleService;
 
@@ -38,6 +40,12 @@ public class VehicleController {
         return ResponseEntity.ok(vehicle);
     }
 
+    @GetMapping("/{code}/bookings")
+    public List<Booking> getVehicleBooking(@PathVariable int code) {
+        Vehicle vehicle = vehicleService.getVehicleByCode(code);
+        return vehicle.getBookings();
+    }  
+
     @DeleteMapping("/{code}")
     public ResponseEntity<Void> remove(@PathVariable int code) {
         vehicleService.removeByCode(code);
@@ -45,7 +53,7 @@ public class VehicleController {
     }
 
     @PostMapping()
-    public ResponseEntity<Vehicle> save(@RequestBody VehicleDTO vehicleDTO, HttpServletRequest request,
+    public ResponseEntity<Vehicle> save(@Valid @RequestBody VehicleDTO vehicleDTO, HttpServletRequest request,
             UriComponentsBuilder builder
 
     ) {
@@ -57,7 +65,7 @@ public class VehicleController {
     }
 
     @PutMapping("/{code}")
-    public ResponseEntity<Vehicle> alter(@RequestBody VehicleDTO vehicleDTO, @PathVariable int code) {
+    public ResponseEntity<Vehicle> alter(@Valid @RequestBody VehicleDTO vehicleDTO, @PathVariable int code) {
         Vehicle vehicle = vehicleService.fromDTO(vehicleDTO);
         vehicle.setCode(code);
         vehicle = vehicleService.update(vehicle);

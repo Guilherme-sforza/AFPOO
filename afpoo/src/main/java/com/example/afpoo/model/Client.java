@@ -50,4 +50,8 @@ public class Client {
         return bookings.add(booking);
     }
 
+    public ArrayList<Booking> getBookings() {
+        return bookings;
+    }
+
 }

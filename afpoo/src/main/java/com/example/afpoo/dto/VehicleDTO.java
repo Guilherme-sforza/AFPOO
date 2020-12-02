@@ -1,13 +1,13 @@
 package com.example.afpoo.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
 
 public class VehicleDTO {
     
-    @NotBlank(message = "Model is required!");
+    @NotBlank(message = "Model is required")
     private String model;
-    @NotBlank(message = "Vehicle's value is required!");
+    @Min(value = 1, message = "Value must not be less than 1")
     private double value;
 
     public String getModel() {

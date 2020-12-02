@@ -33,5 +33,10 @@ public class Vehicle {
 
 	public boolean addBooking(Booking booking) {
         return bookings.add(booking);
-    }
+	}
+
+	public ArrayList<Booking> getBookings() {
+		return bookings;
+	}
+	
 }

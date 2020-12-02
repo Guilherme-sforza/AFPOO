@@ -26,13 +26,22 @@ public class VehicleService {
 		Optional<Vehicle> op = repository.getVehicleByCode(code);
          return op.orElseThrow( () -> 
                    new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,"Veiculo nao cadastrado"
+                        HttpStatus.NOT_FOUND,"Vehicle not registered"
                    )
                 );
 	}
-
+	
 	public void removeByCode(int code) {
-		repository.remove(getVehicleByCode(code));
+		Vehicle aux = repository.getVehicleByCode(code).get();
+        if(aux.getBookings().isEmpty())
+        {
+            repository.remove(aux); 
+            return;
+        }
+        Optional.empty().orElseThrow( () ->
+            new ResponseStatusException( 
+                HttpStatus.METHOD_NOT_ALLOWED,"Vehicle has bookings")
+        );
 	}
 
 	public Vehicle save(Vehicle vehicle) {

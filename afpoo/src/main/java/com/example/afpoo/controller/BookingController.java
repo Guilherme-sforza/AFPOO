@@ -1,5 +1,7 @@
 package com.example.afpoo.controller;
 
+import java.util.List;
+
 import com.example.afpoo.model.Booking;
 import com.example.afpoo.service.BookingService;
 
@@ -27,8 +29,6 @@ public class BookingController {
         Booking booking = bookingService.getBookingByCode(code);
         return ResponseEntity.ok(booking);
     }
-
-
 
 
 }
